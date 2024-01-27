@@ -1,34 +1,59 @@
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartWidget from '../CartWidget/CartWidget';
 import React from 'react';
+import { Link, NavLink } from "react-router-dom";
+import {getProductsByCategory} from '../../../asyncMock';
 
-
-function NavBar() {
-    return (
-        <>
-        <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
-            <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">Celulares</Nav.Link>
-                        <Nav.Link href="#link">Televisores</Nav.Link>
-                        <NavDropdown title="Electrodomesticos" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Aires Acondicionados</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Lavarropas</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">lavavajillas</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-                <CartWidget/>
-            </Container>
-        </Navbar>
-        </>
-    )   
+function NavScrollExample() {
+  return (
+    <Navbar fixed="top" className="bg-body-tertiary">
+      <Container fluid>
+        <Navbar.Brand href="/">Tienda de articulos</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Nav.Link href="/">Todos los Generos</Nav.Link>
+            <NavDropdown title="Discos" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="/category/jazz">
+                Jazz
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/category/country">
+                Country
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/category/rock">
+                Rock
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/category/fusion">
+                Fusion
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link href="#" disabled>
+              Carrito
+            </Nav.Link>
+            <CartWidget size={3200}/>
+          </Nav>
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Buscar en la pagina"
+              className="me-2"
+              aria-label="Busqueda"
+            />
+            <Button variant="outline-success">Buscar</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default NavBar;
+export default NavScrollExample;
